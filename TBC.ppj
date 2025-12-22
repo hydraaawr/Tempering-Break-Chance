@@ -16,6 +16,7 @@
         <Variable Name="ModsFolder" Value="C:\Juegos\skyrim_modding\mods\mods" />
     </Variables>
     <Imports>
+        <Import>C:\Juegos\skyrim_modding\mods\Game Root\Data\Scripts\Source</Import>
         <Import>C:\Juegos\skyrim_modding\mods\Game Root\Data\Source\Scripts</Import>
         <Import>C:\Juegos\skyrim_modding\mods\mods\powerofthree's Papyrus Extender\Source\scripts</Import>
     </Imports>
