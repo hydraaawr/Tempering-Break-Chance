@@ -12,8 +12,8 @@ endEvent
 
 
 Event OnMenuOpen(String menuName)
-    if (menuName == "Crafting Menu") ;&& (Game.GetCurrentCrosshairRef().HasKeywordString("isBlacksmithWorkbench") || Game.GetCurrentCrosshairRef().HasKeywordString("CraftingSmithingSharpeningWheel")))
-        Debug.Notification("Opened a tempering bench") ; DEBUG
+    if (menuName == "Crafting Menu")
+        Debug.Notification("Opened crafting menu") ; DEBUG
 
     endif
 EndEvent
@@ -22,4 +22,7 @@ EndEvent
 
 Event OnItemCrafted(ObjectReference akBench, Location akLocation, Form akCreatedItem)
     Debug.Notification("Item Crafted")
+    if(akBench.HasKeywordString("WICraftingSmithingTempering")) ;; sharpening wheel or armor workbench
+        Debug.Notification("Item tempered at a tempering bench") ; DEBUG
+    endif
 EndEvent
