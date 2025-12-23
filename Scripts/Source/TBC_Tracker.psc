@@ -36,6 +36,11 @@ Event OnItemCrafted(ObjectReference akBench, Location akLocation, Form akCreated
     if(akBench.HasKeywordString("WICraftingSmithingTempering")) ;; sharpening wheel or armor workbench
         ;Debug.Notification("Item tempered at a tempering bench") ; DEBUG
         
+        ; Skip break chance if player is in dialogue (Honed Metal compatibility)
+        if PlayerRef.IsInDialogueWithPlayer()
+            return
+        endif
+        
         float smithingLevel = PlayerRef.GetActorValue("Smithing")
         float breakChance = CalculateBreakChance(smithingLevel)
         float roll = Utility.RandomFloat(0.0, 1.0)
