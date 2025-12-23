@@ -32,15 +32,15 @@ EndFunction
 
 
 Event OnItemCrafted(ObjectReference akBench, Location akLocation, Form akCreatedItem)
-    Debug.Notification("Item Crafted")
+    ;Debug.Notification("Item Crafted") ; DEBUG
     if(akBench.HasKeywordString("WICraftingSmithingTempering")) ;; sharpening wheel or armor workbench
-        Debug.Notification("Item tempered at a tempering bench") ; DEBUG
+        ;Debug.Notification("Item tempered at a tempering bench") ; DEBUG
         
         float smithingLevel = PlayerRef.GetActorValue("Smithing")
         float breakChance = CalculateBreakChance(smithingLevel)
         float roll = Utility.RandomFloat(0.0, 1.0)
         
-        Debug.Notification("Break chance: " + breakChance + " | Roll: " + roll) ; DEBUG
+        ;Debug.Notification("Break chance: " + breakChance + " | Roll: " + roll) ; DEBUG
         
         if (roll < breakChance)
             Debug.Notification("Item broke during tempering!")

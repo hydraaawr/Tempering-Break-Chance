@@ -60,6 +60,6 @@ Event OnOptionHighlight(int option)
     if (option == baseBreakChanceOID)
         SetInfoText("Base chance for an item to break during tempering. Default: 50%")
     elseif (option == skillScalingFactorOID)
-        SetInfoText("Scaling factor for smithing skill reducing break chance. Default: 80%")
+        SetInfoText("How much the smithing level reduces break chance. Default: 80%")
     endif
 EndEvent
