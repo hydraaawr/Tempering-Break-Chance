@@ -8,11 +8,26 @@ GlobalVariable Property _TBC_BaseBreakChance Auto
 ; At 100.0, level 100 smithing eliminates all break chance
 GlobalVariable Property _TBC_SkillScalingFactor Auto
 
+bool honedMetalActive = false ; 1.1.0 - Honed Metal compatibility fixed
+
 
 Event OnInit()
     Debug.Notification("TBC Initialized")
     PO3_Events_Alias.RegisterForItemCrafted(self)
+    RegisterForModEvent("HMServiceStarted", "OnHMServiceStarted")
+    RegisterForModEvent("HMServiceFinished", "OnHMServiceFinished")
 endEvent
+
+;; 1.1.0 - Listen to HM events for compatibility fix
+Event OnHMServiceStarted(string eventName, string strArg, float numArg, Form sender)
+    honedMetalActive = true
+    ;Debug.Notification("Honed Metal service started")
+EndEvent
+
+Event OnHMServiceFinished(string eventName, string strArg, float numArg, Form sender)
+    honedMetalActive = false
+    ;Debug.Notification("Honed Metal service finished")
+EndEvent
 
 
 
@@ -36,8 +51,9 @@ Event OnItemCrafted(ObjectReference akBench, Location akLocation, Form akCreated
     if(akBench.HasKeywordString("WICraftingSmithingTempering")) ;; sharpening wheel or armor workbench
         ;Debug.Notification("Item tempered at a tempering bench") ; DEBUG
         
-        ; Skip break chance if player is in dialogue (Honed Metal compatibility)
-        if PlayerRef.IsInDialogueWithPlayer()
+        ; Skip break chance if Honed Metal is active
+        if honedMetalActive
+            ;Debug.Notification("Honed Metal active, skipping break chance") ; DEBUG
             return
         endif
         
